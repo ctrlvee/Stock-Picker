@@ -7,27 +7,48 @@ def stock_picker(array)
  
   @min = array.min
   @max = array.max
-  print_result
+  print_result()
   get_index()
 end
 
 def get_index
   @best_buy_sell = []
+  @max_index  = @price_list.index(@max)
+  @min_index = @price_list.index(@min)
+
   @price_list.each_index do |price_index|
     case price_index
-    when @price_list.index(@min)
+    when @min_index
       @best_buy_sell.append(price_index)
-    when @price_list.index(@max)
+    when @max_index
+      reassign_max()
       @best_buy_sell.append(price_index)
+
     end
   end
+
   @best_buy_sell
-  binding.pry
+
 end
 
 
 def print_result
   puts "The profit is #{@max} - #{@min} = #{@max-@min}."
 end
+
+
+
+def reassign_max
+  binding.pry
+  remove_list = @price_list
+  until (@min_index < @max_index)
+    if (@max_index < @min_index)
+      remove_list.delete(@max)
+      @max = remove_list.max
+    end
+  end
+end
+
+
 
 stock_picker(@price_list)
