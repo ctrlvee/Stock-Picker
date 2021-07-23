@@ -4,12 +4,10 @@ require 'pry-byebug'
 
 @price_list = [17,3,6,9,15,8,6,1,10]
 def stock_picker(array)
-  
   @min = array.min
-  @max = array.max
-  print_result()
-  
+  @max = array.max 
   get_index()
+  print_result()
 end
 
 def initialize_index
@@ -21,6 +19,7 @@ def get_index
   @best_buy_sell = []
   initialize_index()
   
+  binding.pry
   reassign_max()
   @price_list.each_index do |price_index|
     case price_index
@@ -30,20 +29,14 @@ def get_index
       @best_buy_sell.append(price_index)
     end
   end
-  
   @best_buy_sell
-
 end
-
 
 def print_result
   puts "The profit is #{@max} - #{@min} = #{@max-@min}."
 end
 
-
-
 def reassign_max
-  binding.pry
   remove_list = @price_list
   until (@min_index < @max_index) do
     if (@max_index < @min_index)
@@ -54,7 +47,5 @@ def reassign_max
     end
   end
 end
-
-
 
 stock_picker(@price_list)
