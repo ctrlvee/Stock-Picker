@@ -19,8 +19,9 @@ def get_index
   @best_buy_sell = []
   initialize_index()
   
-  binding.pry
+ 
   reassign_max()
+  reassign_min()
   @price_list.each_index do |price_index|
     case price_index
     when @min_index
@@ -42,10 +43,22 @@ def reassign_max
     if (@max_index < @min_index)
       remove_list.delete(@max)
       @max = remove_list.max
-      @max_index = remove_list.index(@max)
-      @min_index = remove_list.index(@min)
+      reassign_index(remove_list)
     end
   end
+end
+
+def reassign_index(remove_list)
+  @max_index = remove_list.index(@max)
+  @min_index = remove_list.index(@min)
+end
+
+def reassign_min
+  remove_list = @price_list
+
+  remove_list.delete(@min)
+  @min = remove_list.min
+  reassign_index(remove_list)
 end
 
 stock_picker(@price_list)
