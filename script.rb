@@ -12,11 +12,15 @@ def stock_picker(array)
   get_index()
 end
 
-def get_index
-  @best_buy_sell = []
+def initialize_index
   @max_index  = @price_list.index(@max)
   @min_index = @price_list.index(@min)
+end
 
+def get_index
+  @best_buy_sell = []
+  initialize_index()
+  
   reassign_max()
   @price_list.each_index do |price_index|
     case price_index
