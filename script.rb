@@ -19,9 +19,10 @@ def get_index
   @best_buy_sell = []
   initialize_index()
   
- 
+  reassign_min() # the action needs to happen here with the changing the min
+  #the reassign_max function accomodates according to the position of min, so we will always get an acceptable value for max!
   reassign_max()
-  reassign_min()
+  
   @price_list.each_index do |price_index|
     case price_index
     when @min_index
