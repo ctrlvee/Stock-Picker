@@ -19,7 +19,10 @@ def get_index
   @best_buy_sell = []
   initialize_index()
   
-  reassign_min() # the action needs to happen here with the changing the min
+
+  binding.pry
+  containPairs()
+  #reassign_min() # the action needs to happen here with the changing the min
   #the reassign_max function accomodates according to the position of min, so we will always get an acceptable value for max!
   reassign_max()
   
@@ -60,6 +63,20 @@ def reassign_min
   remove_list.delete(@min)
   @min = remove_list.min
   reassign_index(remove_list)
+end
+
+def checkIfMin_or_Max(value)
+  if value == @max || value == @min
+    return true
+  end
+end
+
+def containPairs
+  #Array << value is inaccessible if placed inside a conditional statement
+  @nested_array = @price_list.select() do |value|
+   checkIfMin_or_Max(value) 
+  end
+  @nested_array
 end
 
 stock_picker(@price_list)
